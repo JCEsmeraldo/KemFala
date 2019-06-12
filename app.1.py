@@ -6,13 +6,13 @@ from scipy.io import wavfile as wav
 
 
 # Number of samplepoints
-N = 600
+N = 6000
 # sample spacing
 T = 1.0 / 800.0
 x = np.linspace(0.0, N*T, N)
 y = np.sin(50.0 * 2.0*np.pi*x) + 0.5*np.sin(80.0 * 2.0*np.pi*x)
 
-rate, data = wav.read('Samples/ze1.wav')
+rate, data = wav.read('Samples/ze2.wav')
 l_audio = len(data.shape)
 if l_audio == 2:
     data = data.sum(axis=1) / 2
@@ -26,6 +26,8 @@ FFT_side = abs(scipy.fft(data))[range(N//2)]
 freqs = scipy.fftpack.fftfreq(data.size, t[1]-t[0])
 fft_freqs = np.array(freqs)
 # freqs_side = freqs[range(N//2)]
+plt.ylabel('Frequency (Hz)')
+plt.xlabel('Seconds')
 # fft_freqs_side = np.array(freqs_side)
 p1 = plt.plot(t, data, "g")
 plt.show()
